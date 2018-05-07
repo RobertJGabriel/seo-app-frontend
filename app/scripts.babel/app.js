@@ -9,16 +9,19 @@ var vm = new Vue({
     features: [],
     loading: null,
     error: false,
+    success: false,
     emailAddress: '',
     forwordOpen: false,
     errorMessage: '',
-    input: ''
+    successMessage: '',
+    email: '',
+    URL: ''
   },
 
   methods: {
     updateURL: function (arrayOfTabs) {
       var activeTab = arrayOfTabs[0];
-      this.input = activeTab.url;
+      this.URL = activeTab.url;
     },
     goHome: function () {
       this.features = [];
@@ -49,10 +52,9 @@ var vm = new Vue({
     sendEmailReport: function (event) {
 
       this.error = false;
-      if ( this.email == '' || event.key != 'Enter') {
+      if (this.email == '' || event.key != 'Enter') {
         return false;
       }
-
 
       if (this.validateEMAIL(this.email) == false) {
         this.errorMessage = 'Please enter a valid email';
@@ -66,13 +68,13 @@ var vm = new Vue({
       this.error = false; // Set the error to false.
       this.features = []; // Clear features
 
-      let encodedInput = encodeURI(this.input); // Encode the url to https safe.
+      let encodedURL = encodeURI(this.URL); // Encode the url to https safe.
 
-      if (this.loading || this.input == '' || event.key != 'Enter') {
+      if (this.loading || this.URL == '' || event.key != 'Enter') {
         return false;
       }
 
-      if (this.validateUrl(this.input) == false) {
+      if (this.validateUrl(this.URL) == false) {
         this.errorMessage = 'Please enter a valid URL';
         this.error = true;
         this.loading = null;
@@ -81,7 +83,7 @@ var vm = new Vue({
 
       this.loading = true;
 
-      this.$http.get(`${getSEOReportURL}?name=${encodedInput}`).then(response => {
+      this.$http.get(`${getSEOReportURL}?name=${encodedURL}`).then(response => {
         this.features = JSON.parse(response.bodyText).features.css; // Parse the coffee lists
         this.loading = false;
       }, response => {

@@ -15,17 +15,22 @@
 		<div class="navbar notWhite">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					Technical SEO
+					Can I use for <b class="bold-color">SEO</b>
 				</div>
 			</div>
 		</div>
 
 		<div class="form-group is-empty notWhite search">
 			<input type="text" class="form-control col-md-8" placeholder="https://www.eample.com" id="comment" @keyup="getSEOReport"
-				v-model="input">
+				v-model="URL">
 		</div>
 
-		<div class="alert alert-dismissible alert-warning" v-if="error == true">
+
+    <div class="alert alert-dismissible alert-success" v-if="success == true">
+        <p>{{successMessage}}</p>
+      </div>
+
+    <div class="alert alert-dismissible alert-warning" v-if="error == true">
 			<p>{{errorMessage}}</p>
 		</div>
 
