@@ -1,7 +1,7 @@
 'use strict';
 
 
-const getSEOReportURL = 'https://seo-bot-.herokuapp.com/results';
+const getSEOReportURL = 'https://seo-bot-.herokuapp.com/';
 
 var vm = new Vue({
   el: '#app',
@@ -52,6 +52,8 @@ var vm = new Vue({
     sendEmailReport: function (event) {
 
       this.error = false;
+      this.success = false;
+      let encodedEmail = encodeURI(this.email); // Encode the url to https safe.
       if (this.email == '' || event.key != 'Enter') {
         return false;
       }
@@ -62,6 +64,21 @@ var vm = new Vue({
         this.loading = false;
         return false;
       }
+      this.loading = true;
+
+
+      this.$http.post(`${getSEOReportURL}email?email=${encodedEmail}`, this.features).then(response => {
+
+        this.success = true;
+        this.successMessage = `Report sent to ${this.email}`;
+        this.loading = false;
+      }, response => {
+        this.error = true;
+        this.loading = null;
+        this.errorMessage = `Something went wrong sending the email report to ${this.email}`;
+      });
+
+
     },
     getSEOReport: function (event) {
 
@@ -83,7 +100,7 @@ var vm = new Vue({
 
       this.loading = true;
 
-      this.$http.get(`${getSEOReportURL}?name=${encodedURL}`).then(response => {
+      this.$http.get(`${getSEOReportURL}results?name=${encodedURL}`).then(response => {
         this.features = JSON.parse(response.bodyText).features.css; // Parse the coffee lists
         this.loading = false;
       }, response => {
