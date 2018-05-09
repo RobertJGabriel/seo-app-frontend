@@ -1,12 +1,14 @@
 'use strict';
 
 
-const getSEOReportURL = 'https://seo-bot-.herokuapp.com/';
+const getSEOReportURL = 'http://localhost:8080/';
+
 
 var vm = new Vue({
   el: '#app',
   data: {
     features: [],
+    notSupport: [],
     loading: null,
     error: false,
     success: false,
@@ -26,6 +28,8 @@ var vm = new Vue({
     goHome: function () {
       this.features = [];
       this.loading = null;
+      this.success = false;
+      this.error = false;
     },
     share: function () {
       var opened = this.forwordOpen;
@@ -49,26 +53,61 @@ var vm = new Vue({
       var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return regex.test(email);
     },
+    removeDuplicates: function (arr) {
+      let unique_array = []
+      for (let i = 0; i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
+          unique_array.push(arr[i])
+        }
+      }
+      return unique_array
+    },
+    sortFeatures: function (features) {
+
+      for (var i = 0; i < features.length; i++) {
+        var obj = features[i];
+        if (!obj.supported) {
+          console.log(obj.name);
+          this.notSupport.push(obj.name);
+        }
+      }
+      this.notSupport = this.removeDuplicates(this.notSupport);
+
+    },
     sendEmailReport: function (event) {
 
       this.error = false;
       this.success = false;
+      this.sortFeatures(this.features);
       let encodedEmail = encodeURI(this.email); // Encode the url to https safe.
-      if (this.email == '' || event.key != 'Enter') {
+
+      if (this.notSupport.length == 0 || this.notSupport === undefined) {
+        this.error = true;
+        this.errorMessage = `Theres no errors to send woooooooo!`;
+        return false
+      }
+
+      if (event.key != 'Enter'){
         return false;
       }
 
-      if (this.validateEMAIL(this.email) == false) {
+      if (this.validateEMAIL(this.email) == false || this.email == '' ) {
         this.errorMessage = 'Please enter a valid email';
         this.error = true;
         this.loading = false;
         return false;
       }
+
       this.loading = true;
 
 
-      this.$http.post(`${getSEOReportURL}email?email=${encodedEmail}`, this.features).then(response => {
+      let object = {
+        email : this.email,
+        url : this.URL,
+        notSupport : this.notSupport
+      };
 
+      this.$http.post(`${getSEOReportURL}email?email=${encodedEmail}`, object).then(response => {
         this.success = true;
         this.successMessage = `Report sent to ${this.email}`;
         this.loading = false;
