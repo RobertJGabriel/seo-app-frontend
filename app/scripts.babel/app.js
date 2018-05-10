@@ -1,7 +1,7 @@
 'use strict';
 
 
-const getSEOReportURL = 'http://localhost:8080/';
+const getSEOReportURL = 'https://seo-bot-.herokuapp.com/';
 
 
 var vm = new Vue({
