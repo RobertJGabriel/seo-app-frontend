@@ -39,19 +39,19 @@
 
 				<div class="row" v-if="loading == null">
 					<div class="info-card">
-						<h4>What is technical SEO</h4>
+						<h5>What is technical SEO</h5>
 						<p>Technical search engine optimisation (SEO) describes the efforts of a webmaster to ensure their website is compatible
 							with search engine guidelines, and can be indexed and ranked for keyphrase searches accordingly.</p>
 					</div>
 					<div class="info-card">
-						<h4>What does this tool do?</h4>
+						<h5>What does this tool do?</h5>
 						<p>
 							This tool displays and non-exhaustive list of HTML, Javascript and CSS features a page is using which are not supported by
 							the Google Search bot
 						</p>
 					</div>
 					<div class="info-card">
-						<h4>Why should I care?</h4>
+						<h5>Why should I care?</h5>
 						<p>
 							If the Google bot cant render your site or parts of it. It wont index as high. So you can run this tool on your website and
 							give out to your web developer if he uses unsupported features.
@@ -103,17 +103,17 @@
 			
 				<div class="row">
           	<div class="form-group col-xs-12 notWhite noWhite-smaller search search-bottom" v-if="forwordOpen" >
-                <input type="text" class="form-control col-md-8" placeholder="email@example.com"  @keyup="sendEmailReport"
+                <input type="text" class="form-control col-md-8" placeholder="developerl@fix-this.com"  @keyup="sendEmailReport"
                 v-model="email">
             </div>
 					<div class="col-xs-4" v-on:click="goHome()">
-							<i class="fa fa-home"	aria-hidden="true"></i>
+							<i class="fa fa-home"	aria-hidden="true" title="Go home."></i>
 					</div>
 					<div class="col-xs-4" v-on:click="share()">
-							<i class="fa fa-share" aria-hidden="true"></i>
+							<i class="fa fa-share" aria-hidden="true" title="Send the report to you web developer."></i>
 					</div>
 					<div class="col-xs-4" v-on:click="goTo('https://www.robertgabriel.ninja/seo-help')">
-							<i	class="fa fa-question-circle" aria-hidden="true"></i>
+							<i	class="fa fa-question-circle" aria-hidden="true" title="Have questions that need anwsering?"></i>
 					</div>
 		 
 				</div>
