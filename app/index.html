@@ -15,18 +15,18 @@
 		<div class="navbar notWhite">
 			<div class="container-fluid">
 				<div class="navbar-header">
-          <b class="bold-color">SEO</b> frienssdly
+          <b class="bold-color">SEO</b> friendly
 				</div>
 			</div>
 		</div>
 
-		<div class="form-group is-empty notWhite search" v-if="license != 'EXPIRED' || license != 'NONE' ">
+		<div class="form-group is-empty notWhite search" v-if="license != 'EXPIRED'">
 			<input type="text" class="form-control col-md-8" placeholder="https://www.eample.com" id="comment" @keyup="getSEOReport"
 				v-model="URL">
 		</div>
 
     
-    <div class="alert alert-dismissible alert-success" v-if="license == 'EXPIRED'">
+    <div class="alert alert-dismissible alert-warning" v-if="license == 'EXPIRED'">
       <p>Your trial has runout. Please upgrade to a paid account. <a href="https://chrome.google.com/webstore/detail/technical-seo-audit/jgcglckingjkalbnbmfjjfiboabfmlbl" target="_blank"> Upgrade here</a></p>
       
     </div>
@@ -45,6 +45,14 @@
 
 				<div class="row" v-if="loading == null">
 					<div class="info-card">
+						<h5>How it works</h5>
+            <p>1. Open the Chrome extension on any page</p>
+            <p>2. Run the Technical SEO audit</p>
+            <p>3. See the HTML, JS and CSS features that are not supported on the site and effect SEO rankings.</p>
+					</div>
+
+
+          <div class="info-card">
 						<h5>What is technical SEO</h5>
 						<p>Technical search engine optimisation (SEO) describes the efforts of a webmaster to ensure their website is compatible
 							with search engine guidelines, and can be indexed and ranked for keyphrase searches accordingly.</p>
