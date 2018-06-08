@@ -3,9 +3,6 @@
 const getSEOReportURL = 'https://seo-bot-.herokuapp.com/';
 
 
-
-
-
 const vm = new Vue({
   el: '#app',
   data: {
