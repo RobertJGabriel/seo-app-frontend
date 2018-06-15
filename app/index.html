@@ -12,10 +12,10 @@
 <body>
   <div id="app" class="container">
 
-    <div class="navbar notWhite">
+    <div class="navbar orange">
       <div class="container-fluid">
         <div class="navbar-header">
-         Can I use <b class="bold-color">___</b>
+          Can I use ___
         </div>
       </div>
     </div>
@@ -26,10 +26,15 @@
     </div>
 
 
-    <div class="alert alert-dismissible alert-warning" v-if="license == 'EXPIRED'">
-      <p>Your trial has runout. Please upgrade to a paid account. You can cancel any time you like. 
-        <a href="https://chrome.google.com/webstore/detail/technical-seo-audit/jgcglckingjkalbnbmfjjfiboabfmlbl"
-          target="_blank"> Upgrade here</a>
+
+
+    <div class=" search alert alert-dismissible alert-warning margin-top-lg" v-if="license == 'EXPIRED'">
+      <p>Your trial has ended.</p>
+      <p>Please upgrade to a paid account.</p>
+      <p>
+        You can cancel any time.
+        <a href="https://chrome.google.com/webstore/detail/technical-seo-audit/jgcglckingjkalbnbmfjjfiboabfmlbl" target="_blank">
+          Upgrade here</a>
       </p>
 
     </div>
@@ -57,7 +62,9 @@
 
           <div class="info-card">
             <h5>About</h5>
-            <p>"Can I use" provides up-to-date browser support tables for support of front-end web technologies on desktop and mobile web browsers. So you can run this on any page and get a response of all the features that are used on the page and not supported.</p> 
+            <p>"Can I use" provides up-to-date browser support tables for support of front-end web technologies on desktop and
+              mobile web browsers. So you can run this on any page and get a response of all the features that are used on
+              the page and not supported.</p>
           </div>
           <div class="info-card">
             <h5>What does this tool do?</h5>
@@ -66,7 +73,7 @@
               the Google Search bot or popular browsers.
             </p>
           </div>
-         
+
         </div>
 
         <div class="sk-fading-circle" v-if="loading == true">
@@ -125,7 +132,7 @@
           <div class="col-xs-4" v-on:click="share()">
             <i class="fa fa-share" aria-hidden="true" title="Send the report to you web developer."></i>
           </div>
-          <div class="col-xs-4" v-on:click="goTo('https://www.robertgabriel.ninja/seo-help')">
+          <div class="col-xs-4" v-on:click="goTo('https://www.robertgabriel.ninja/contact')">
             <i class="fa fa-question-circle" aria-hidden="true" title="Have questions that need anwsering?"></i>
           </div>
 
